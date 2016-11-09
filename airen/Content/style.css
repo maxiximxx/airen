@@ -1,0 +1,27 @@
+﻿*{
+   padding:0;
+   margin:0;
+}
+body{font-family:'Microsoft YaHei';}
+.title{text-align:center;font-size:3em;color:brown}
+/*Index*/
+
+#index{background:url('../images/background.jpg'); background-size:1920px 980px;}
+.box{text-align:center}
+.box input{width:200px; height:50px;background-color:brown;color:#fff;font-size:1.5em;border: 0;margin: 50px;outline:none;cursor:pointer}
+
+/*Reg*/
+#Reg{background:url('../images/background-1.jpg');background-size:1920px 980px; }
+#Reg form{text-align:center; width:1000px; margin:50px auto;padding:50px 0;}
+input{height:30px;width:300px;margin:10px}
+#code{width:150px;margin-left:-140px}
+#btn-reg{font-size:1.5em;background-color:brown;color:#fff;border: 0;outline:none;cursor:pointer;}
+#myCanvas{position:absolute;margin-top: 10px;margin-left: 40px;}
+.warning{box-shadow:0 0 10px red;}
+
+/*Login*/
+#login{background:url('../images/background-1.jpg'); background-size:1920px 980px;}
+#login form{text-align:center; width:1000px; margin:50px auto;padding:50px 0;}
+#logcode{width:150px;margin-left:-140px}
+#btn-log{font-size:1.5em;background-color:brown;color:#fff;border: 0;outline:none;cursor:pointer;}
+#logmyCanvas{position:absolute;margin-top: 10px;margin-left: 40px;}

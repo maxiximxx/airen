@@ -1,0 +1,99 @@
+﻿@using airen.Models;
+@{
+    Layout = null;
+    var db = new airenEntities();
+    string phone;
+    if (Session["phone"] != null)
+    {
+        phone = Session["phone"].ToString();
+    }
+    else
+    {    
+        phone = Request.Cookies["Myuser"]["phone"].ToString();
+    }
+    var user = db.user.Where(p => p.Phone == phone).FirstOrDefault();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AirenManage</title>
+    <link href="~/Content/css.css" rel="stylesheet" />
+    <link href="~/Content/zyUpload.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    @RenderPage("/Views/Airen/Top.cshtml")
+    <div class="middle">
+        <div class="left">
+            @{ if (user.Type != "管理员")
+                {
+                    <ul>
+                        <li><a href="/Airen/UserManage">用户信息</a></li>
+                        <li><a href="/Airen/PwdManage">密码修改</a></li>
+                        <li><a href="/Airen/PhotoManage">照片上传</a></li>
+                        <li><a target="_blank" href="/Airen/PhotoView">照片查看</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li><a href="/Airen/UserManage">用户信息</a></li>
+                        <li><a href="/Airen/PwdManage">密码修改</a></li>
+                        <li><a href="/Airen/SuperManage">系统用户</a></li>
+                    </ul>
+                }
+            }
+        </div>
+        <div class="right"
+             
+             
+             >
+            <h2>照片上传</h2>
+            <div id="demo" class="demo"></div>
+        </div>
+    </div>
+    @RenderPage("/Views/Airen/Bottom.cshtml")
+    <script src="~/scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" type="text/javascript"></script>
+    <script src="~/scripts/zyFile.js"></script>
+    <script src="~/scripts/zyUpload.js"></script>
+    <script src="~/scripts/jq22.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.middle').height(window.innerHeight - 200);
+            $('.left').height(window.innerHeight - 200);
+            function delCookie(name) {
+                var exp = new Date();
+                exp.setTime(exp.getTime() - 10000);
+                document.cookie = name + "=" + name + ";expires=" + exp.toUTCString() + "; path=/";
+
+            }
+            $('#btn-exit').click(function () {
+                sweetAlert({
+                    title: "",
+                    text: "真的要退出吗...",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: true
+                }, function () {
+
+                    $.post("/Airen/exit", function (data) {
+                        if (data == "success")
+                            window.location.href = "/#log-page";
+                    });
+                    delCookie("Myuser");
+                });
+                //var con = confirm("真的要退出吗...");
+                //if (con) {
+                //    delCookie("Myuser");
+                //    window.location.href = "/#log-page";
+                //}
+
+            })
+        })
+    </script>
+</body>
+</html>

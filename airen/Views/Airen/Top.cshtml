@@ -1,0 +1,27 @@
+﻿@using airen.Models;
+@{
+    var db = new airenEntities();
+    string phone;
+    if (Session["phone"] != null)
+    {
+        phone = Session["phone"].ToString();
+    }
+    else
+    {
+        phone = Request.Cookies["Myuser"]["phone"].ToString();
+    }
+    var user = db.user.Where(p => p.Phone == phone).FirstOrDefault();
+
+
+}
+<div class="top">
+    @{ if(user!=null)
+        { 
+    <h2>Hello @user.Name</h2>}
+        else
+        {
+            <h2>Hello </h2>
+        }
+    }
+    <button id="btn-exit">退出</button>
+</div>

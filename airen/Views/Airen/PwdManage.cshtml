@@ -1,0 +1,156 @@
+﻿@using airen.Models;
+@{
+    Layout = null;
+    var db = new airenEntities();
+    string phone;
+    if (Session["phone"] != null)
+    {
+        phone = Session["phone"].ToString();
+    }
+    else
+    {
+        phone = Request.Cookies["Myuser"]["phone"].ToString();
+    }
+    var user = db.user.Where(p => p.Phone == phone).FirstOrDefault();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AirenManage</title>
+    <link href="~/Content/css.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    @RenderPage("/Views/Airen/Top.cshtml")
+    <div class="middle">
+        <div class="left">
+            @{ if (user.Type != "管理员")
+                {
+                    <ul>
+                        <li><a href="/Airen/UserManage">用户信息</a></li>
+                        <li><a href="/Airen/PwdManage">密码修改</a></li>
+                        <li><a href="/Airen/PhotoManage">照片上传</a></li>
+                        <li><a target="_blank" href="/Airen/PhotoView">照片查看</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li><a href="/Airen/UserManage">用户信息</a></li>
+                        <li><a href="/Airen/PwdManage">密码修改</a></li>
+                        <li><a href="/Airen/SuperManage">系统用户</a></li>
+                        <li><a href="/Airen/NewsManage">新闻中心</a></li>
+                    </ul>
+                }
+            }
+
+        </div>
+        <div class="right user">
+            <h2>密码修改</h2>
+            <form action="/Airen/dopwd">
+                <label>手机号：</label><input type="text" id="phone" value="@ViewData["phone"]" disabled /><br />
+                <label>原密码：</label><input type="password" id="oldpwd" placeholder="原密码" /><br />
+                <label>新密码：</label><input type="password" id="newpwd" placeholder="新密码" /><br />
+                <label style="margin-left: -16px">确认密码：</label><input type="password" id="confirmpwd" placeholder="确认新密码" /><br />
+                <input style="margin-left: 73px" type="button" id="btn-ok" value="确 认" />
+            </form>
+        </div>
+    </div>
+    @RenderPage("/Views/Airen/Bottom.cshtml")
+
+    <script src="~/scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.middle').height(window.innerHeight - 200);
+            $('.left').height(window.innerHeight - 200);
+            function delCookie(name) {
+                var exp = new Date();
+                exp.setTime(exp.getTime() - 10000);
+                document.cookie = name + "=" + name + ";expires=" + exp.toUTCString() + "; path=/";
+            }
+            $('#btn-exit').click(function () {
+                sweetAlert({
+                    title: "",
+                    text: "真的要退出吗...",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: true
+                }, function () {
+
+                    $.post("/Airen/exit", function (data) {
+                        if (data == "success")
+                            window.location.href = "/#log-page";
+                    });
+                    delCookie("Myuser");
+                });
+                //var con = confirm("真的要退出吗...");
+                //if (con) {
+                //    delCookie("Myuser");
+                //    window.location.href = "/#log-page";
+                //}
+
+            })
+
+            $('#btn-ok').click(function () {
+                var pwd = @Session["pwd"];
+                var phone = $('#phone').val();
+                var opwd = $('#oldpwd').val();
+                var npwd = $('#newpwd').val();
+                var confirmpwd = $('#confirmpwd').val();
+                if (opwd == "" || npwd == "" || confirmpwd == "") {
+                    sweetAlert("发生错误了...", "请检查输入...", "warning");
+                    return
+                }
+                if(opwd != pwd){
+                    sweetAlert("发生错误了...", "原密码输入错误...", "warning");
+                    return
+                }
+                if (opwd == npwd) {
+                    sweetAlert("发生错误了...", "新密码不能与原密码相同...", "warning");
+                    return
+                }
+                if (npwd != confirmpwd) {
+                    sweetAlert("发生错误了...", "两次密码输入不一致...", "warning");
+                    return
+                }
+
+                $.ajax({
+                    url: "/Airen/dopwd",
+                    type: "post",
+                    data: { phone: phone, pwd: npwd },
+                    success: function (data) {
+                        if (data == "success") {
+                            sweetAlert({
+                                title: "",
+                                text: "修改成功！请重新登录...",
+                                type: "success",
+                                showCancelButton: true,
+                                closeOnConfirm: true
+                            }, function () {
+                                delCookie("Myuser");
+                                window.location.href = "/#log-page";
+                            });
+                            //var con = confirm("修改成功！请重新登录...");
+                            //if (con)
+                            //{
+                            //    delCookie("Myuser");
+                            //    window.location.href = "/#log-page";}
+                        }
+                        else
+                            sweetAlert("发生错误了...", "异常...", "error");
+                    },
+                    error: function () {
+                        sweetAlert("发生错误了...", "异常...", "error");
+                    }
+
+                })
+            })
+
+        })
+    </script>
+</body>
+</html>

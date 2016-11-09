@@ -1,0 +1,90 @@
+﻿*{margin:0;padding:0;}
+
+body {font-family:microsoft yahei;overflow-x:hidden;
+}
+a{text-decoration:none}
+
+.top{text-align:center;background:linear-gradient(darkcyan, burlywood);color:#fff;height: 100px;line-height: 100px;position:relative}
+.top button{font:15px microsoft yahei;height:30px;line-height:30px; width:100px;margin:10px;position:absolute;top:0;right:0;background: brown;color: #fff; border-radius: 5px;border: 0}
+.top button:hover{opacity:.9;}
+.middle{overflow:hidden;}
+.middle .left{float:left;width:10%;border:1px solid brown;border-top: 0;border-left: 0;}
+.middle .left ul{padding:20px 0;font-size:15px}
+.middle .left ul li{list-style:none;font-size:1.5em;border-bottom:2px solid burlywood;display:block;background-color:darkcyan;height: 50px;line-height: 50px;text-align: center;}
+.middle .left ul li a{color:#fff;cursor:pointer}
+.middle .right{float:left;width:87%;border:1px solid darkcyan;margin-left:55px;border-right:0;border-top:0;text-align:center}
+.middle .right h2{text-align: center; margin: 30px;font-size:2em;}
+.bottom{background:#eee;text-align:center;height:100px;line-height:100px;width:100%;left:0;bottom:0;}
+
+
+.user h2{margin-top:50px;}
+.user form input{height:30px;width:300px;margin:10px;line-height:30px;}
+select{height:34px;width:304px;margin:10px;}
+#btn-ok{color:#fff;background-color:darkcyan;border:none;font:15px microsoft yahei;outline:none}
+#btn-ok:hover{opacity:.9}
+
+#imgbox-loading {position: absolute;top: 0;left: 0;	cursor: pointer;display: none;z-index: 90;}
+#imgbox-loading div {background: #FFF;width: 100%;height : 100%;}
+#imgbox-overlay {position: absolute;top: 0;	left: 0;width: 100%;height: 100%;background: #000;display: none;z-index: 80;}
+.imgbox-wrap {position: absolute;top: 0;left: 0;background: #FFF;display: none;	z-index: 90;}
+.imgbox-img {padding: 0;margin: 0;border: none;width: 100%;	height: 100%;vertical-align: top;}
+.imgbox-title {	padding-top: 10px;font-size: 11px;text-align: center;font-family: Arial;color: #333;display: none;}
+.imgbox-bg-wrap {position: absolute;padding: 0;margin: 0;display: none;}
+.imgbox-bg {position: absolute;width: 20px;	height: 20px;}
+
+#main{position:relative}
+.pin{padding:15px 0 0 15px;float:left}
+.box{padding:10px;border:1px solid #ccc;box-shadow:0 0 6px #ccc;border-radius:5px}
+.box img{width:162px;height:auto}
+
+.panel-heading{padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;}
+.panel-body {
+    padding: 15px;
+}
+.panel-body input{width:100px;height:32px;}
+
+.table{border-collapse: collapse; width:100%; border: none; color:#000;}
+.table tr th{ height:30px; padding:0px 12px; background-color:#f1f1f1;  font-weight:normal; color:#0e50a0;}
+.table tr th,.table tr td{ border:1px solid #ddd; text-align:center; }
+.table tr td{ padding:12px;}
+.table tr:hover{background:#ecf5fb}
+
+/* pagination */
+.page{position:relative;text-align:center;zoom:1;margin:10px auto}
+.page:before,.page:after{content:"";display:table}
+.page:after{clear:both;overflow:hidden}
+.page span{float:left;margin:0 5px;width:30px;height:30px;line-height:30px;font-size:14px}
+.page .active{float:left;margin:0 5px;width:30px;height:30px;line-height:30px;background:brown;color:#fff;font-size:14px;border:1px solid brown}
+.page a{float:left;margin:0 5px;width:30px;height:30px;line-height:30px;background:#fff;border:1px solid #ebebeb;font-size:14px;text-decoration:none;color:#000}
+.page a:hover{color:#fff;background:brown}
+.page .next,.page .prev{font-family:微软雅黑;font-size:14px}
+.page input{float:left;margin:0 5px;width:30px;height:30px;line-height:30px;text-align:center;background:#fff;border:1px solid #ebebeb;outline:none;color:#bdbdbd;font-size:14px}
+.total{border:1px solid #ebebeb;font-family: 微软雅黑;color: #000;}
+
+
+.mask{width:100%;height:100%;position:absolute;z-index:999;display:none;top:0;left:0;background:#000;opacity:.5;}
+.dinfo{ border-radius: 5px;box-shadow: 0 0 5px rgba(0,0,0,.5);height:520px;width:720px;border:1px solid #eee;z-index:1000;display:none;position:fixed;left:50%;margin-left:-360px;top:200px; background:#fff;}
+.dinfo span{position:absolute;top:-10px;right:0;font-size:2em;cursor:pointer}
+.dinfo form{margin-top:50px;text-align:center}
+#out,#add,#del{border: 0;background: brown;color: #fff;font:20px/32px microsoft yahei;margin-left:53px;border-radius: 5px;opacity:1;outline:none}
+#out:hover,#add:hover,#del:hover{opacity:.8}
+.dinfo form input{width:360px;height:32px;margin:10px;}
+
+.loading{ width:100%; height:100%; background-color:#fff; z-index:9999; position:absolute; top:0px; left:0px; overflow:hidden;}
+.loading .box{  text-align:center; width:500px; height:155px; margin:15% auto; }
+
+#container{height:600px;}
+#edui1{height:100%;}
+#container iframe{height:480px}
+.uediter{ border-radius: 5px;box-shadow: 0 0 5px rgba(0,0,0,.5);height:auto;width:1200px;border:1px solid #eee;z-index:1000;display:none;position:fixed;left:50%;margin-left:-600px;top:100px; background:#fff;}
+.uediter i{position:absolute;top:-10px;right:10px;font-size:2em;cursor:pointer}
+.uediter #btn-ok{width:100px;height:32px;margin-top:20px}
+.uediter .editbox{width:100%;height:600px;}
+.uediter .editbox tr input{width:300px;height:24px;}
+.uediter .editbox tr {height:40px;}
+.uediter .editbox tr th{vertical-align:top;padding:10px;width:100px}
