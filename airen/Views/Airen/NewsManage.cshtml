@@ -249,7 +249,7 @@
                                 data: { page: page },
                                 success: function (data) {
                                     if (data != null) {
-                                        $('.table').html("@th_html" + data);
+                                        $('.table').html("@th_html" + data);                                    
                                         $('.table .dat .ckbox').nextAll().click(info);
                                         $('#check-all').click(function () {
                                             selcetAll($('#check-all').is(":checked"));
@@ -274,7 +274,6 @@
                                 success: function (data) {
                                     if (data != null) {
                                         $('.table').html("@th_html" + data);
-                                        $('.page').pagination();
                                         $('.table .dat .ckbox').nextAll().click(info);
                                         $('#check-all').click(function () {
                                             selcetAll($('#check-all').is(":checked"));
